@@ -107,8 +107,8 @@ function updateColor(pageX, pageY){
     150,
   ]
 
-  let newColor = new THREE.Color(`rgb(${rgb.join(",")})`)
-  gsap.to(mesh.material.color, {r: newColor.r, g: newColor.g, b: newColor.b});
+  let newColor = new THREE.Color(`rgb(${rgb.join(',')})`)
+  gsap.to(mesh.material.color, {r: newColor.r, g: newColor.g, b: newColor.b})
 
 }
 
@@ -122,6 +122,17 @@ window.addEventListener('touchstart', (e)=>{
   e.preventDefault()
   mouseDown = true;
   const touch = e.touches[0]
-  updateColor()
+  updateColor(touch.pageX, touch.pageY);
+})
+
+window.addEventListener('touchend', (e) =>{
+  e.preventDefault()
+  mouseDown = false;
+})
+
+window.addEventListener('touchmove', (e) =>{
+  e.preventDefault(mouseDown)
+  let touch = e.touches[0]
+  updateColor(touch.pageX, touch.pageY);
 })
 
